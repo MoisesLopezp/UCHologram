@@ -14,15 +14,31 @@ public class scr_ContlHands : MonoBehaviour {
 
     float Scale = 1f;
 
+    float PDHands = 0f;
+
+    public GameObject Hand_Left;
+    public GameObject Hand_Right;
+
     // Use this for initialization
     void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (R_Pinch && L_Pinch)
+        {
+            PDHands = Vector3.Distance(Hand_Left.transform.position, Hand_Right.transform.position);
+
+            if (PDHands > 0.3f)
+                Zoom(1);
+
+            if (PDHands < 0.15f)
+                Zoom(-1);
+
+            Debug.Log(PDHands);
+        }
+    }
 
     public void Set_RH_Inclinado(bool _i)
     {
@@ -47,18 +63,18 @@ public class scr_ContlHands : MonoBehaviour {
         if ((R_Pinch && Direction == 1) || (L_Pinch && Direction == -1))
             return;
 
-        Model.transform.Rotate(new Vector3(0f, 1f, 0f), 30 * Direction);
+        Model.transform.Rotate(new Vector3(0f, 1f, 0f), 45 * Direction);
     }
 
     public void Zoom(int Dir)
     {
         if (Dir == 1 && Scale < 1.5f)
         {
-            Scale += 0.1f;
+            Scale += 0.1f * Time.deltaTime;
         }
         if (Dir == -1 && Scale > 0.5f)
         {
-            Scale -= 0.1f;
+            Scale -= 0.1f * Time.deltaTime;
         }
 
         Model.transform.localScale = new Vector3(Scale, Scale, Scale);
