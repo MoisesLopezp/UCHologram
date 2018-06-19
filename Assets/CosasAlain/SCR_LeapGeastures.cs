@@ -12,15 +12,18 @@ public class SCR_LeapGeastures : MonoBehaviour
     public void Shot()
     {
         anim.SetTrigger("Fall");
+        Debug.Log("hay me cai ");
     }
 
     public void Wave()
     {
         anim.SetTrigger("Wave");
+        Debug.Log("holi");
     }
 
     public void no()
     {
         anim.SetTrigger("Shake");
+        Debug.Log("nel kernell");
     }
 }
