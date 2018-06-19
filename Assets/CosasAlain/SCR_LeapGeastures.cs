@@ -3,27 +3,38 @@
 public class SCR_LeapGeastures : MonoBehaviour
 {
     Animator anim;
+    public Rigidbody rb;
 
     private void Start()
     {
         anim = this.GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        Debug.Log(rb.angularVelocity);
+    }
+
     public void Shot()
     {
-        anim.SetTrigger("Fall");
+        if (rb.angularVelocity.magnitude >= 2)
+            anim.SetTrigger("Fall");
         Debug.Log("hay me cai ");
     }
 
     public void Wave()
     {
-        anim.SetTrigger("Wave");
+        if (rb.angularVelocity.magnitude >= 2)
+            anim.SetTrigger("Wave");
+
         Debug.Log("holi");
     }
 
     public void no()
     {
-        anim.SetTrigger("Shake");
+        if (rb.angularVelocity.magnitude >= 2)
+            anim.SetTrigger("Shake");
+
         Debug.Log("nel kernell");
     }
 }
